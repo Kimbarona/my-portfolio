@@ -18,54 +18,9 @@ RESPONSE FORMAT:
 - Be conversational but professional
 - If suggesting projects, mention specific tech stacks mentioned in the context`;
 
-const rateLimitMap = new Map();
-const RATE_LIMIT_WINDOW = 60 * 1000;
-const MAX_REQUESTS = 20;
-
-function checkRateLimit(ip) {
-  const now = Date.now();
-  const record = rateLimitMap.get(ip);
-
-  if (!record) {
-    rateLimitMap.set(ip, { count: 1, resetTime: now + RATE_LIMIT_WINDOW });
-    return true;
-  }
-
-  if (now > record.resetTime) {
-    rateLimitMap.set(ip, { count: 1, resetTime: now + RATE_LIMIT_WINDOW });
-    return true;
-  }
-
-  if (record.count >= MAX_REQUESTS) {
-    return false;
-  }
-
-  record.count++;
-  return true;
-}
-
-function cleanOldRateLimits() {
-  const now = Date.now();
-  for (const [key, value] of rateLimitMap.entries()) {
-    if (now > value.resetTime) {
-      rateLimitMap.delete(key);
-    }
-  }
-}
-
-setInterval(cleanOldRateLimits, RATE_LIMIT_WINDOW);
-
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
-  }
-
-  const clientIp = req.headers['x-forwarded-for'] || req.connection?.remoteAddress || 'unknown';
-
-  if (!checkRateLimit(clientIp)) {
-    return res.status(429).json({
-      error: 'Too many requests. Please wait a moment before trying again.'
-    });
   }
 
   const { message } = req.body;
@@ -131,8 +86,8 @@ export default async function handler(req, res) {
     }
 
     if (error.status === 429) {
-      return res.status(429).json({
-        error: 'AI service is experiencing high demand. Please try again shortly.'
+      return res.status(503).json({
+        error: 'OpenAI rate limit reached. Please wait a moment and try again.'
       });
     }
 
