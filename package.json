@@ -5,11 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:api": "node test-api.js",
+    "dev:all": "npm run dev:api & npm run dev",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:api": "node -e \"fetch('http://localhost:3001/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:'What is your experience?'})}).then(r=>r.json()).then(console.log).catch(console.error)\""
   },
   "dependencies": {
+    "dotenv": "^17.4.2",
     "openai": "^6.34.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
