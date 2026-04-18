@@ -118,7 +118,7 @@ export default function AIAssistant() {
       console.error('API Error:', err);
       setMessages(prev => [...prev, {
         role: 'assistant',
-        content: "I'm currently running in demo mode. For full AI responses, please deploy to Vercel and add your OpenAI API key. In demo mode, I can answer basic questions about the developer's skills and experience!"
+        content: "I'm having trouble connecting to the AI service right now. This could be due to rate limits. Please try again in a moment!"
       }]);
     } finally {
       setIsLoading(false);
