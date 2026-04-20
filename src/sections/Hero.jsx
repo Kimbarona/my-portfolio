@@ -65,15 +65,21 @@ export default function Hero() {
         </div>
 
         <h1 className="hero-title fade-in" style={{ animationDelay: '0.4s' }}>
-          Full Stack Developer
-          <br />
-          <span className="title-gradient">| AI-Powered Application Developer</span>
+          Senior Full-Stack Developer
         </h1>
 
         <p className="hero-tagline fade-in" style={{ animationDelay: '0.6s' }}>
-          Building scalable web systems and intelligent AI-driven applications
-          that push the boundaries of modern software engineering
+          Building scalable web applications, SaaS platforms, and business automation systems using Laravel, Vue.js, and modern web technologies.
         </p>
+
+        <p className="hero-description fade-in" style={{ animationDelay: '0.7s' }}>
+          I am a full-stack developer with 8+ years of experience building real-world systems including enterprise applications, e-commerce platforms, and automation tools. I specialize in backend architecture, API development, and scalable system design.
+        </p>
+
+        <div className="hero-focus fade-in" style={{ animationDelay: '0.75s' }}>
+          <span className="focus-label">Focus:</span>
+          <span className="focus-items">SaaS Development · API Design · Business Automation · Performance Optimization · Scalable Web Applications</span>
+        </div>
 
         <div className="hero-cta fade-in" style={{ animationDelay: '0.8s' }}>
           <a href="#projects" className="btn btn-primary">
@@ -81,7 +87,7 @@ export default function Hero() {
               <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
               <circle cx="12" cy="12" r="3"></circle>
             </svg>
-            View Projects
+            View My Work
           </a>
           <a href="#contact" className="btn btn-secondary">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

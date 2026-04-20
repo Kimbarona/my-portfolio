@@ -180,11 +180,38 @@
 }
 
 .hero-tagline {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  max-width: 750px;
+  margin: 0 auto 24px;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+.hero-description {
+  font-size: 1.1rem;
   color: var(--text-secondary);
   max-width: 700px;
-  margin: 0 auto 48px;
+  margin: 0 auto 24px;
   line-height: 1.7;
+}
+
+.hero-focus {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 40px;
+  font-size: 0.95rem;
+}
+
+.focus-label {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.focus-items {
+  color: var(--accent-blue);
 }
 
 .hero-cta {
