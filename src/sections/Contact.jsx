@@ -31,16 +31,26 @@ const socialLinks = [
   },
 ];
 
+const initialFormData = {
+  name: '',
+  email: '',
+  company: '',
+  projectType: '',
+  budget: '',
+  subject: '',
+  message: '',
+  website: '',
+};
+
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const MIN_MESSAGE_LENGTH = 20;
+
 export default function Contact() {
   const sectionRef = useRef(null);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  });
-  const [status, setStatus] = useState('');
+  const [formData, setFormData] = useState(initialFormData);
+  const [status, setStatus] = useState('idle');
   const [errors, setErrors] = useState({});
+  const [notice, setNotice] = useState(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -63,37 +73,80 @@ export default function Contact() {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = 'Name is required';
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email';
+    const trimmed = {
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      subject: formData.subject.trim(),
+      message: formData.message.trim(),
+    };
+
+    if (!trimmed.name) newErrors.name = 'Full name is required.';
+    if (!trimmed.email) {
+      newErrors.email = 'Email address is required.';
+    } else if (!emailPattern.test(trimmed.email)) {
+      newErrors.email = 'Enter a valid email address.';
     }
-    if (!formData.subject.trim()) newErrors.subject = 'Subject is required';
-    if (!formData.message.trim()) newErrors.message = 'Message is required';
+    if (!trimmed.subject) newErrors.subject = 'Subject is required.';
+    if (!trimmed.message) {
+      newErrors.message = 'Message is required.';
+    } else if (trimmed.message.length < MIN_MESSAGE_LENGTH) {
+      newErrors.message = `Message must be at least ${MIN_MESSAGE_LENGTH} characters.`;
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
 
+    setNotice(null);
     setStatus('sending');
-    setTimeout(() => {
+
+    const payload = Object.fromEntries(
+      Object.entries(formData).map(([key, value]) => [key, typeof value === 'string' ? value.trim() : value])
+    );
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        if (result.errors) setErrors(result.errors);
+        throw new Error(result.error || 'Unable to send your message right now.');
+      }
+
       setStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      setTimeout(() => setStatus(''), 3000);
-    }, 1500);
+      setFormData(initialFormData);
+      setNotice({
+        type: 'success',
+        message: result.message || "Thanks for reaching out. I'll get back to you as soon as possible.",
+      });
+    } catch (error) {
+      setStatus('error');
+      setNotice({
+        type: 'error',
+        message: error.message || 'Something went wrong. Please try again.',
+      });
+    }
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((current) => ({ ...current, [name]: value }));
     if (errors[name]) {
-      setErrors({ ...errors, [name]: '' });
+      setErrors((current) => ({ ...current, [name]: '' }));
     }
+    if (notice) setNotice(null);
+    if (status === 'success' || status === 'error') setStatus('idle');
   };
+
+  const isSending = status === 'sending';
 
   return (
     <section id="contact" ref={sectionRef} className="contact">
@@ -168,32 +221,127 @@ export default function Contact() {
           </div>
 
           <div className="contact-form-container fade-in" style={{ animationDelay: '0.2s' }}>
-            <form className="contact-form glass-card" onSubmit={handleSubmit} noValidate>
+            <form className="contact-form" onSubmit={handleSubmit} noValidate>
+              <div className="form-header">
+                <span className="form-eyebrow">Project Inquiry</span>
+                <h3>Tell me what you are building</h3>
+                <p>Share a few details and I will reply with the next best step.</p>
+              </div>
+
+              {notice && (
+                <div className={`form-notice ${notice.type}`} role="status" aria-live="polite">
+                  {notice.type === 'success' ? (
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  ) : (
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="12" y1="8" x2="12" y2="12"></line>
+                      <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                  )}
+                  <span>{notice.message}</span>
+                </div>
+              )}
+
+              <div className="honeypot-field" aria-hidden="true">
+                <label htmlFor="website">Website</label>
+                <input
+                  type="text"
+                  id="website"
+                  name="website"
+                  value={formData.website}
+                  onChange={handleChange}
+                  tabIndex="-1"
+                  autoComplete="off"
+                />
+              </div>
+
               <div className="form-row">
                 <div className={`form-group ${errors.name ? 'has-error' : ''}`}>
-                  <label htmlFor="name">Name</label>
+                  <label htmlFor="name">Full Name</label>
                   <input
                     type="text"
                     id="name"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
+                    disabled={isSending}
+                    autoComplete="name"
+                    aria-invalid={Boolean(errors.name)}
+                    aria-describedby={errors.name ? 'name-error' : undefined}
                     placeholder="John Doe"
                   />
-                  {errors.name && <span className="error-message">{errors.name}</span>}
+                  {errors.name && <span id="name-error" className="error-message">{errors.name}</span>}
                 </div>
                 <div className={`form-group ${errors.email ? 'has-error' : ''}`}>
-                  <label htmlFor="email">Email</label>
+                  <label htmlFor="email">Email Address</label>
                   <input
                     type="email"
                     id="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
+                    disabled={isSending}
+                    autoComplete="email"
+                    aria-invalid={Boolean(errors.email)}
+                    aria-describedby={errors.email ? 'email-error' : undefined}
                     placeholder="john@example.com"
                   />
-                  {errors.email && <span className="error-message">{errors.email}</span>}
+                  {errors.email && <span id="email-error" className="error-message">{errors.email}</span>}
                 </div>
+              </div>
+
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="company">Company Name <span>Optional</span></label>
+                  <input
+                    type="text"
+                    id="company"
+                    name="company"
+                    value={formData.company}
+                    onChange={handleChange}
+                    disabled={isSending}
+                    autoComplete="organization"
+                    placeholder="Acme Inc."
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="projectType">Project Type <span>Optional</span></label>
+                  <select
+                    id="projectType"
+                    name="projectType"
+                    value={formData.projectType}
+                    onChange={handleChange}
+                    disabled={isSending}
+                  >
+                    <option value="">Select a type</option>
+                    <option value="Full-stack web app">Full-stack web app</option>
+                    <option value="AI integration">AI integration</option>
+                    <option value="E-commerce platform">E-commerce platform</option>
+                    <option value="Backend/API development">Backend/API development</option>
+                    <option value="Consulting or code review">Consulting or code review</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="budget">Budget <span>Optional</span></label>
+                <select
+                  id="budget"
+                  name="budget"
+                  value={formData.budget}
+                  onChange={handleChange}
+                  disabled={isSending}
+                >
+                  <option value="">Select a range</option>
+                  <option value="Under $1,000">Under $1,000</option>
+                  <option value="$1,000 - $3,000">$1,000 - $3,000</option>
+                  <option value="$3,000 - $8,000">$3,000 - $8,000</option>
+                  <option value="$8,000+">$8,000+</option>
+                  <option value="Not sure yet">Not sure yet</option>
+                </select>
               </div>
 
               <div className={`form-group ${errors.subject ? 'has-error' : ''}`}>
@@ -204,9 +352,12 @@ export default function Contact() {
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
+                  disabled={isSending}
+                  aria-invalid={Boolean(errors.subject)}
+                  aria-describedby={errors.subject ? 'subject-error' : undefined}
                   placeholder="Project Inquiry"
                 />
-                {errors.subject && <span className="error-message">{errors.subject}</span>}
+                {errors.subject && <span id="subject-error" className="error-message">{errors.subject}</span>}
               </div>
 
               <div className={`form-group ${errors.message ? 'has-error' : ''}`}>
@@ -216,18 +367,22 @@ export default function Contact() {
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Tell me about your project..."
-                  rows="5"
+                  disabled={isSending}
+                  aria-invalid={Boolean(errors.message)}
+                  aria-describedby={errors.message ? 'message-error message-help' : 'message-help'}
+                  placeholder="Tell me about your goals, timeline, and the problem you want to solve..."
+                  rows="6"
                 ></textarea>
-                {errors.message && <span className="error-message">{errors.message}</span>}
+                <span id="message-help" className="field-hint">Minimum {MIN_MESSAGE_LENGTH} characters.</span>
+                {errors.message && <span id="message-error" className="error-message">{errors.message}</span>}
               </div>
 
               <button
                 type="submit"
                 className={`btn btn-primary submit-btn ${status}`}
-                disabled={status === 'sending'}
+                disabled={isSending}
               >
-                {status === 'sending' ? (
+                {isSending ? (
                   <>
                     <span className="spinner"></span>
                     Sending...
@@ -241,7 +396,7 @@ export default function Contact() {
                   </>
                 ) : (
                   <>
-                    Send Message
+                    Send Inquiry
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <line x1="22" y1="2" x2="11" y2="13"></line>
                       <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
@@ -249,6 +404,10 @@ export default function Contact() {
                   </>
                 )}
               </button>
+
+              <p className="form-footnote">
+                Your message is sent securely and never shared with third parties.
+              </p>
             </form>
           </div>
         </div>

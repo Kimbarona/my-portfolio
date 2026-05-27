@@ -1,16 +1,43 @@
-# React + Vite
+# Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React/Vite portfolio with Vercel serverless API routes for the AI assistant and contact form.
 
-Currently, two official plugins are available:
+## Local Development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Install dependencies, then run the API mock server and Vite dev server:
 
-## React Compiler
+```bash
+npm install
+npm run dev:api
+npm run dev
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The Vite dev server proxies `/api/*` requests to `http://localhost:3001`.
 
-## Expanding the ESLint configuration
+## Contact Form Email Setup
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+The contact form uses Resend from the serverless `/api/contact` endpoint, keeping the API key out of the browser.
+
+Create `.env` locally and add the same variables in Vercel:
+
+```bash
+RESEND_API_KEY=your_resend_api_key_here
+RESEND_FROM_EMAIL="Portfolio Contact <hello@yourdomain.com>"
+CONTACT_TO_EMAIL=your_email@example.com
+CONTACT_SEND_CONFIRMATION=true
+```
+
+Notes:
+- Use a verified Resend sending domain for `RESEND_FROM_EMAIL` in production.
+- Set `CONTACT_TO_EMAIL` to the inbox where inquiries should arrive.
+- Set `CONTACT_SEND_CONFIRMATION=false` if you only want the on-page success message and do not want confirmation emails sent to visitors.
+
+## Deployment
+
+Deploy to Vercel with:
+
+```bash
+npm run build
+```
+
+Add all environment variables in Vercel Project Settings before testing the production contact form.

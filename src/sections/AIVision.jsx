@@ -4,6 +4,7 @@ import './AIVision.css';
 const aiFeatures = [
   {
     title: 'AI Chatbots',
+    label: 'Conversation UX',
     description: 'Intelligent conversational interfaces for customer support, lead generation, and user engagement',
     icon: (
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -13,6 +14,7 @@ const aiFeatures = [
   },
   {
     title: 'AI SaaS Products',
+    label: 'Product Systems',
     description: 'Building scalable AI-powered SaaS applications for content generation, data analysis, and automation',
     icon: (
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -24,6 +26,7 @@ const aiFeatures = [
   },
   {
     title: 'RAG Systems',
+    label: 'Knowledge Retrieval',
     description: 'Retrieval-Augmented Generation systems for intelligent document processing and knowledge management',
     icon: (
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -36,6 +39,7 @@ const aiFeatures = [
   },
   {
     title: 'AI Integration',
+    label: 'Workflow Automation',
     description: 'Seamlessly integrating OpenAI, Claude, and other AI APIs into existing applications and workflows',
     icon: (
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -44,6 +48,26 @@ const aiFeatures = [
     ),
   },
 ];
+
+function AIFeatureCard({ feature, index }) {
+  return (
+    <article
+      className="ai-feature fade-in"
+      style={{ animationDelay: `${index * 0.1}s` }}
+    >
+      <div className="ai-feature-top">
+        <div className="ai-feature-icon" aria-hidden="true">{feature.icon}</div>
+        <span className="ai-feature-number">{String(index + 1).padStart(2, '0')}</span>
+      </div>
+      <div className="ai-feature-content">
+        <span className="ai-feature-label">{feature.label}</span>
+        <h3>{feature.title}</h3>
+        <p>{feature.description}</p>
+      </div>
+      <div className="ai-feature-accent" aria-hidden="true"></div>
+    </article>
+  );
+}
 
 export default function AIVision() {
   const sectionRef = useRef(null);
@@ -69,11 +93,7 @@ export default function AIVision() {
 
   return (
     <section id="ai-vision" ref={sectionRef} className="ai-vision">
-      <div className="ai-bg-effects">
-        <div className="ai-orb ai-orb-1"></div>
-        <div className="ai-orb ai-orb-2"></div>
-        <div className="ai-orb ai-orb-3"></div>
-      </div>
+      <div className="ai-bg-effects" aria-hidden="true"></div>
 
       <div className="container">
         <div className="ai-vision-header fade-in">
@@ -86,23 +106,14 @@ export default function AIVision() {
           </div>
           <h2 className="section-title">I Build AI-Powered Applications</h2>
           <p className="section-subtitle">
-            Leveraging cutting-edge AI technologies to create intelligent,
-            context-aware applications that learn and evolve
+            Designing practical AI features that improve support workflows,
+            internal operations, knowledge search, and product automation.
           </p>
         </div>
 
         <div className="ai-features">
           {aiFeatures.map((feature, index) => (
-            <div
-              key={feature.title}
-              className="ai-feature glass-card fade-in"
-              style={{ animationDelay: `${index * 0.15}s` }}
-            >
-              <div className="ai-feature-icon">{feature.icon}</div>
-              <h3>{feature.title}</h3>
-              <p>{feature.description}</p>
-              <div className="ai-feature-glow"></div>
-            </div>
+            <AIFeatureCard key={feature.title} feature={feature} index={index} />
           ))}
         </div>
 

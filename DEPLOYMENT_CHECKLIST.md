@@ -10,7 +10,7 @@
 
 ### 2. Dependencies
 - [ ] All server dependencies in `dependencies` (not `devDependencies`)
-- [ ] API packages: `openai` (if using OpenAI)
+- [ ] API packages: `openai` (AI assistant); contact form uses Resend via `fetch`
 - [ ] Run `npm install` locally first
 
 ### 3. Environment Variables
@@ -49,7 +49,10 @@ npm run build
 
 ### 4. Environment Variables (CRITICAL)
 - [ ] Add `OPENAI_API_KEY` = your_api_key_here
-- [ ] Add any other required env vars
+- [ ] Add `RESEND_API_KEY` = your_resend_api_key_here
+- [ ] Add `RESEND_FROM_EMAIL` = `Portfolio Contact <hello@yourdomain.com>`
+- [ ] Add `CONTACT_TO_EMAIL` = your receiving inbox
+- [ ] Add `CONTACT_SEND_CONFIRMATION` = `true` or `false`
 - [ ] Select correct environments: Production, Preview, Development
 
 ---
@@ -103,6 +106,7 @@ git push origin main
 - [ ] Visit production URL
 - [ ] Test all pages
 - [ ] Test AI chat functionality
+- [ ] Test contact form delivery and confirmation email
 - [ ] Check browser console for errors
 
 ### 4. Domain Setup (Optional)
