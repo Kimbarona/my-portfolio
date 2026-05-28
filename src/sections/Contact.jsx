@@ -44,11 +44,29 @@ const initialFormData = {
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MIN_MESSAGE_LENGTH = 20;
+const SUCCESS_MESSAGE = "Thanks for reaching out. I'll get back to you as soon as possible.";
+const ERROR_MESSAGE = 'I could not send the message right now. Please try again later.';
+const SUCCESS_NOTICE_DURATION = 5000;
+
+async function readResponseBody(response) {
+  const text = await response.text();
+
+  if (!text) return {};
+
+  try {
+    return JSON.parse(text);
+  } catch {
+    return { message: text };
+  }
+}
 
 export default function Contact() {
   const sectionRef = useRef(null);
+  const formRef = useRef(null);
+  const successTimerRef = useRef(null);
   const [formData, setFormData] = useState(initialFormData);
   const [status, setStatus] = useState('idle');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
   const [notice, setNotice] = useState(null);
 
@@ -70,6 +88,21 @@ export default function Contact() {
 
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    return () => {
+      if (successTimerRef.current) {
+        window.clearTimeout(successTimerRef.current);
+      }
+    };
+  }, []);
+
+  const clearSuccessTimer = () => {
+    if (successTimerRef.current) {
+      window.clearTimeout(successTimerRef.current);
+      successTimerRef.current = null;
+    }
+  };
 
   const validateForm = () => {
     const newErrors = {};
@@ -99,10 +132,21 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validateForm()) return;
+    clearSuccessTimer();
+
+    if (!validateForm()) {
+      setStatus('error');
+      setNotice({
+        type: 'error',
+        message: 'Please review the highlighted fields before sending.',
+      });
+      return;
+    }
 
     setNotice(null);
+    setErrors({});
     setStatus('sending');
+    setIsSubmitting(true);
 
     const payload = Object.fromEntries(
       Object.entries(formData).map(([key, value]) => [key, typeof value === 'string' ? value.trim() : value])
@@ -114,39 +158,58 @@ export default function Contact() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
-      const result = await response.json().catch(() => ({}));
+      const result = await readResponseBody(response);
 
       if (!response.ok) {
         if (result.errors) setErrors(result.errors);
-        throw new Error(result.error || 'Unable to send your message right now.');
+        throw new Error(result.error || ERROR_MESSAGE);
+      }
+
+      if (result.success === false) {
+        if (result.errors) setErrors(result.errors);
+        throw new Error(result.error || ERROR_MESSAGE);
       }
 
       setStatus('success');
-      setFormData(initialFormData);
+      setErrors({});
+      setFormData({ ...initialFormData });
       setNotice({
         type: 'success',
-        message: result.message || "Thanks for reaching out. I'll get back to you as soon as possible.",
+        message: result.message || SUCCESS_MESSAGE,
       });
+      formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      successTimerRef.current = window.setTimeout(() => {
+        setNotice(null);
+        setStatus('idle');
+        successTimerRef.current = null;
+      }, SUCCESS_NOTICE_DURATION);
     } catch (error) {
       setStatus('error');
       setNotice({
         type: 'error',
-        message: error.message || 'Something went wrong. Please try again.',
+        message: error.message || ERROR_MESSAGE,
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   const handleChange = (e) => {
+    clearSuccessTimer();
     const { name, value } = e.target;
     setFormData((current) => ({ ...current, [name]: value }));
     if (errors[name]) {
-      setErrors((current) => ({ ...current, [name]: '' }));
+      setErrors((current) => {
+        const next = { ...current };
+        delete next[name];
+        return next;
+      });
     }
     if (notice) setNotice(null);
     if (status === 'success' || status === 'error') setStatus('idle');
   };
 
-  const isSending = status === 'sending';
+  const isSending = isSubmitting;
 
   return (
     <section id="contact" ref={sectionRef} className="contact">
@@ -221,7 +284,7 @@ export default function Contact() {
           </div>
 
           <div className="contact-form-container fade-in" style={{ animationDelay: '0.2s' }}>
-            <form className="contact-form" onSubmit={handleSubmit} noValidate>
+            <form ref={formRef} className="contact-form" onSubmit={handleSubmit} noValidate>
               <div className="form-header">
                 <span className="form-eyebrow">Project Inquiry</span>
                 <h3>Tell me what you are building</h3>
@@ -229,7 +292,11 @@ export default function Contact() {
               </div>
 
               {notice && (
-                <div className={`form-notice ${notice.type}`} role="status" aria-live="polite">
+                <div
+                  className={`form-notice ${notice.type}`}
+                  role={notice.type === 'error' ? 'alert' : 'status'}
+                  aria-live={notice.type === 'error' ? 'assertive' : 'polite'}
+                >
                   {notice.type === 'success' ? (
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                       <polyline points="20 6 9 17 4 12"></polyline>
@@ -381,6 +448,7 @@ export default function Contact() {
                 type="submit"
                 className={`btn btn-primary submit-btn ${status}`}
                 disabled={isSending}
+                aria-busy={isSending}
               >
                 {isSending ? (
                   <>

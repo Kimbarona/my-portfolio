@@ -191,17 +191,22 @@ export default async function handler(req, res) {
     });
 
     if (sendConfirmation) {
-      await sendResendEmail(apiKey, {
-        from: fromEmail,
-        to: [data.email],
-        reply_to: toEmail,
-        subject: 'Thanks for reaching out',
-        html: buildConfirmationEmail(data),
-        text: `Thanks for reaching out, ${data.name}.\n\nYour message was received successfully. I'll get back to you as soon as possible.\n\n${data.message}`,
-      });
+      try {
+        await sendResendEmail(apiKey, {
+          from: fromEmail,
+          to: [data.email],
+          reply_to: toEmail,
+          subject: 'Thanks for reaching out',
+          html: buildConfirmationEmail(data),
+          text: `Thanks for reaching out, ${data.name}.\n\nYour message was received successfully. I'll get back to you as soon as possible.\n\n${data.message}`,
+        });
+      } catch (confirmationError) {
+        console.warn('Contact confirmation email error:', confirmationError);
+      }
     }
 
     return res.status(200).json({
+      success: true,
       message: "Thanks for reaching out. I'll get back to you as soon as possible.",
     });
   } catch (error) {
