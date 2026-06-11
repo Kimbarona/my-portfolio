@@ -20,15 +20,6 @@ const socialLinks = [
       </svg>
     ),
   },
-  {
-    name: 'Twitter',
-    url: 'https://twitter.com',
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-      </svg>
-    ),
-  },
 ];
 
 const initialFormData = {
@@ -36,7 +27,6 @@ const initialFormData = {
   email: '',
   company: '',
   projectType: '',
-  budget: '',
   subject: '',
   message: '',
   website: '',
@@ -218,8 +208,8 @@ export default function Contact() {
           <div className="contact-info fade-in">
             <h2 className="section-title">Let's Work Together</h2>
             <p className="section-subtitle" style={{ marginBottom: '40px' }}>
-              Have a project in mind? I'd love to hear about it. Drop me a
-              message and let's create something amazing together.
+              Open to full-time roles, contracts, and freelance projects. If
+              you're hiring or have something to build, I'd love to hear from you.
             </p>
 
             <div className="contact-details">
@@ -245,7 +235,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <span className="contact-label">Location</span>
-                  <span className="contact-value">San Fernando, Pampanga, Philippines</span>
+                  <span className="contact-value">Apalit, Pampanga, Philippines</span>
                 </div>
               </div>
 
@@ -286,9 +276,9 @@ export default function Contact() {
           <div className="contact-form-container fade-in" style={{ animationDelay: '0.2s' }}>
             <form ref={formRef} className="contact-form" onSubmit={handleSubmit} noValidate>
               <div className="form-header">
-                <span className="form-eyebrow">Project Inquiry</span>
-                <h3>Tell me what you are building</h3>
-                <p>Share a few details and I will reply with the next best step.</p>
+                <span className="form-eyebrow">Get in touch</span>
+                <h3>Let's talk about the role or project</h3>
+                <p>Share a few details — whether it's a job opportunity or a project — and I'll reply within 24 hours.</p>
               </div>
 
               {notice && (
@@ -375,7 +365,7 @@ export default function Contact() {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="projectType">Project Type <span>Optional</span></label>
+                  <label htmlFor="projectType">Inquiry Type <span>Optional</span></label>
                   <select
                     id="projectType"
                     name="projectType"
@@ -384,31 +374,14 @@ export default function Contact() {
                     disabled={isSending}
                   >
                     <option value="">Select a type</option>
-                    <option value="Full-stack web app">Full-stack web app</option>
+                    <option value="Full-time role">Full-time role</option>
+                    <option value="Contract role">Contract role</option>
+                    <option value="Freelance project">Freelance project</option>
                     <option value="AI integration">AI integration</option>
-                    <option value="E-commerce platform">E-commerce platform</option>
                     <option value="Backend/API development">Backend/API development</option>
-                    <option value="Consulting or code review">Consulting or code review</option>
+                    <option value="Other / general inquiry">Other / general inquiry</option>
                   </select>
                 </div>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="budget">Budget <span>Optional</span></label>
-                <select
-                  id="budget"
-                  name="budget"
-                  value={formData.budget}
-                  onChange={handleChange}
-                  disabled={isSending}
-                >
-                  <option value="">Select a range</option>
-                  <option value="Under $1,000">Under $1,000</option>
-                  <option value="$1,000 - $3,000">$1,000 - $3,000</option>
-                  <option value="$3,000 - $8,000">$3,000 - $8,000</option>
-                  <option value="$8,000+">$8,000+</option>
-                  <option value="Not sure yet">Not sure yet</option>
-                </select>
               </div>
 
               <div className={`form-group ${errors.subject ? 'has-error' : ''}`}>

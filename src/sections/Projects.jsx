@@ -1,12 +1,38 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import './Projects.css';
 
 const projects = [
+  {
+    title: 'Finance Tools Philippines',
+    type: 'Philippine Personal-Finance Calculator Suite',
+    status: 'In Development',
+    image: '/project-screenshots/finance-tools.png',
+    mobileImage: '/project-screenshots/finance-tools-mobile.png',
+    imageAlt: 'Finance Tools Philippines homepage showing salary, take-home, tax, SSS, PhilHealth, and Pag-IBIG calculators using 2025-2026 rates',
+    url: '#',
+    summary:
+      'A free suite of Philippine finance calculators — net salary, take-home pay, BIR income tax, and SSS, PhilHealth, and Pag-IBIG contributions — built on the latest official 2025-2026 rates, with a guides section and embeddable calculator widgets.',
+    responsibilities: [
+      'Built six accurate statutory calculators (salary, take-home, BIR tax, SSS, PhilHealth, Pag-IBIG) using current 2025-2026 rates',
+      'Architected a typed Vue 3 + TypeScript SPA with Vue Router and a custom design-token system',
+      'Implemented an SEO foundation with per-page meta, Open Graph, and JSON-LD structured data',
+      'Created a guides/content section and embeddable calculator widgets for distribution',
+    ],
+    impact: [
+      'Gives Filipino employees, freelancers, and employers instant, accurate net-pay and tax figures',
+      'SEO-first architecture targets high-intent organic search traffic',
+      'Embeddable widgets let other websites reuse the calculators, extending reach',
+    ],
+    highlights: ['SEO-optimized', 'Embeddable widgets', '2025-2026 rates'],
+    tech: ['Vue 3', 'TypeScript', 'Vue Router', 'Vite', 'JSON-LD SEO', 'CSS Design Tokens'],
+    accent: 'emerald',
+  },
   {
     title: 'TINBO Digital Platform',
     type: 'Enterprise Digital Financial Services Platform',
     status: 'Production System',
     image: '/project-screenshots/tinbo.png',
+    mobileImage: '/project-screenshots/tinbo-mobile.png',
     imageAlt: 'TINBO digital services interface with bill payments, e-loading, remittance, and government service categories',
     url: 'https://www.tinbo.ph/',
     summary:
@@ -16,7 +42,6 @@ const projects = [
       'Created reusable responsive UI components for service discovery and transaction flows',
       'Integrated payment gateways, Firebase, and external partner APIs',
       'Improved PostgreSQL query paths and applied Redis caching for transaction-heavy workloads',
-      'Supported AWS deployment, monitoring, and production infrastructure operations',
     ],
     impact: [
       'Supported scalable digital transactions and service access',
@@ -32,6 +57,7 @@ const projects = [
     type: 'Construction Workflow Automation Platform',
     status: 'Enterprise Platform',
     image: '/project-screenshots/construction.png',
+    mobileImage: '/project-screenshots/construction-mobile.png',
     imageAlt: 'Apollo construction monitoring and billing system login screen with construction project background',
     url: 'https://apollo.rdfmis.ph/',
     summary:
@@ -41,7 +67,6 @@ const projects = [
       'Implemented progress billing, retention, down payment, and cost computation logic',
       'Built role-based approval flows for engineers, project heads, and finance teams',
       'Designed scalable monitoring patterns for multiple concurrent projects',
-      'Worked with stakeholders to reduce manual reporting gaps and billing delays',
     ],
     impact: [
       'Reduced billing preparation and monitoring effort by approximately 40-60%',
@@ -49,7 +74,6 @@ const projects = [
       'Improved billing accuracy and project visibility across concurrent projects',
     ],
     highlights: ['Progress tracking', 'Approval workflows', 'Automated billing'],
-    workflow: ['Site progress', 'Cost computation', 'Finance approval'],
     tech: ['Laravel', 'Vue.js', 'React.js', 'MySQL', 'Tailwind CSS', 'Docker', 'Postman'],
     accent: 'violet',
   },
@@ -58,8 +82,9 @@ const projects = [
     type: 'Modern Scalable E-Commerce Platform',
     status: 'Live Platform',
     image: '/project-screenshots/dreampack-ecommerce.png',
+    mobileImage: '/project-screenshots/dreampack-mobile.png',
     imageAlt: 'Dream Pack e-commerce product modal showing product details, filters, variants, and add to cart workflow',
-    url: 'https://dream-pack-store.vercel.app/shop',
+    url: 'https://dream-pack-store.vercel.app/',
     summary:
       'A full-featured commerce platform for packaging product sales, combining a responsive shopping experience with scalable APIs, payment integration, and inventory-ready workflows.',
     responsibilities: [
@@ -67,7 +92,6 @@ const projects = [
       'Developed reactive storefront architecture with Vue 3 and Pinia',
       'Implemented catalog, filtering, cart, checkout, order tracking, and inventory flows',
       'Integrated payment gateway workflows for secure online transactions',
-      'Designed reusable components and modular service boundaries for maintainability',
     ],
     impact: [
       'Delivered scalable e-commerce workflows for packaging product operations',
@@ -75,7 +99,7 @@ const projects = [
       'Created a modular foundation for future product, inventory, and checkout growth',
     ],
     highlights: ['Vue storefront', 'REST API architecture', 'Checkout workflows'],
-    tech: ['Laravel 12', 'Vue 3', 'Pinia', 'Tailwind CSS', 'Filament', 'PostgreSQL', 'Docker', 'AWS', 'Firebase'],
+    tech: ['Laravel 12', 'Vue 3', 'Pinia', 'Tailwind CSS', 'Filament', 'PostgreSQL', 'Docker', 'AWS'],
     accent: 'amber',
   },
 ];
@@ -99,29 +123,105 @@ function ExternalIcon() {
   );
 }
 
+function ChevronIcon({ dir }) {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <polyline
+        points={dir === 'left' ? '15 18 9 12 15 6' : '9 18 15 12 9 6'}
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function DeviceShowcase({ project }) {
+  return (
+    <a
+      className="device-showcase"
+      href={project.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`Open ${project.title}`}
+    >
+      <div className="device-browser">
+        <div className="device-browser-bar" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div className="device-browser-screen">
+          <img src={project.image} alt={`${project.imageAlt} — desktop view`} loading="eager" decoding="async" />
+        </div>
+      </div>
+
+      <div className="device-phone" aria-hidden="false">
+        <div className="device-phone-notch"></div>
+        <div className="device-phone-screen">
+          <img src={project.mobileImage} alt={`${project.title} — mobile view`} loading="eager" decoding="async" />
+        </div>
+      </div>
+
+      <span className="device-views-badge" aria-hidden="true">Desktop + Mobile</span>
+    </a>
+  );
+}
+
 export default function Projects() {
   const sectionRef = useRef(null);
+  const touchStartX = useRef(null);
+  const [active, setActive] = useState(0);
+  const [revealed, setRevealed] = useState(false);
+  const count = projects.length;
 
+  const goTo = useCallback((index) => {
+    setActive((index + count) % count);
+  }, [count]);
+
+  const next = useCallback(() => goTo(active + 1), [active, goTo]);
+  const prev = useCallback(() => goTo(active - 1), [active, goTo]);
+
+  // Reveal-on-scroll. The carousel reveal is held in React state (not an
+  // imperative classList toggle) because the carousel's className changes on
+  // every slide (accent color); an imperatively-added class would be wiped on
+  // re-render, dropping the carousel back to opacity:0.
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return undefined;
-
-    const animatedItems = section.querySelectorAll('.project-showcase, .projects-heading');
+    const heading = section.querySelector('.projects-heading');
+    const carousel = section.querySelector('.projects-carousel');
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-          }
+          if (!entry.isIntersecting) return;
+          if (entry.target === carousel) setRevealed(true);
+          else entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.18 }
+      { threshold: 0.12 }
     );
-
-    animatedItems.forEach((item) => observer.observe(item));
-
+    if (heading) observer.observe(heading);
+    if (carousel) observer.observe(carousel);
     return () => observer.disconnect();
   }, []);
+
+  const onKeyDown = (e) => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); next(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+  };
+
+  const onTouchStart = (e) => { touchStartX.current = e.touches[0].clientX; };
+  const onTouchEnd = (e) => {
+    if (touchStartX.current == null) return;
+    const delta = e.changedTouches[0].clientX - touchStartX.current;
+    if (Math.abs(delta) > 50) { delta < 0 ? next() : prev(); }
+    touchStartX.current = null;
+  };
+
+  const activeProject = projects[active];
 
   return (
     <section id="projects" ref={sectionRef} className="projects">
@@ -136,96 +236,106 @@ export default function Projects() {
           </div>
         </div>
 
-        <div className="project-showcase-list">
-          {projects.map((project, index) => (
+        <div
+          className={`projects-carousel project-showcase-${activeProject.accent} ${revealed ? 'is-visible' : ''}`}
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Featured projects"
+          tabIndex={0}
+          onKeyDown={onKeyDown}
+        >
+          <div
+            className="carousel-viewport"
+            onTouchStart={onTouchStart}
+            onTouchEnd={onTouchEnd}
+          >
             <article
-              key={project.title}
-              className={`project-showcase project-showcase-${project.accent} ${index % 2 === 1 ? 'is-reversed' : ''}`}
-              style={{ '--project-index': index }}
+              key={active}
+              className={`project-slide project-showcase-${activeProject.accent}`}
+              aria-roledescription="slide"
+              aria-label={`${active + 1} of ${count}: ${activeProject.title}`}
             >
-              <a className="project-media" href={project.url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.title}`}>
-                <div className="project-browser-bar" aria-hidden="true">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
-
-                <div className="project-image-frame">
-                  <img src={project.image} alt={project.imageAlt} loading={index === 0 ? 'eager' : 'lazy'} />
-                  <div className="project-image-overlay"></div>
-                </div>
-
-                <div className="project-floating-card project-status-card">
-                  <span className="status-dot"></span>
-                  {project.status}
-                </div>
-
-                {project.workflow && (
-                  <div className="project-floating-card workflow-card">
-                    {project.workflow.map((step) => (
-                      <span key={step}>{step}</span>
-                    ))}
-                  </div>
-                )}
-
-                <div className="project-media-footer">
-                  {project.highlights.slice(0, 2).map((highlight) => (
-                    <span key={highlight}>{highlight}</span>
-                  ))}
-                </div>
-              </a>
+              <DeviceShowcase project={activeProject} />
 
               <div className="project-content">
                 <div className="project-kicker">
-                  <span>{String(index + 1).padStart(2, '0')}</span>
-                  {project.type}
+                  <span>{String(active + 1).padStart(2, '0')}</span>
+                  {activeProject.type}
                 </div>
 
-                <h3>{project.title}</h3>
-                <p className="project-summary">{project.summary}</p>
+                <h3>{activeProject.title}</h3>
+
+                <div className="project-status-row">
+                  <span className="project-status-pill">
+                    <span className="status-dot"></span>
+                    {activeProject.status}
+                  </span>
+                  {activeProject.highlights.map((highlight) => (
+                    <span key={highlight} className="project-highlight-chip">{highlight}</span>
+                  ))}
+                </div>
+
+                <p className="project-summary">{activeProject.summary}</p>
 
                 <div className="project-section">
                   <h4>Engineering Highlights</h4>
                   <ul className="project-list">
-                    {project.responsibilities.map((item) => (
+                    {activeProject.responsibilities.map((item) => (
                       <li key={item}>{item}</li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="project-impact-grid">
-                  <div className="project-section impact-section">
-                    <h4>Business Impact</h4>
-                    <ul className="project-list">
-                      {project.impact.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="project-section stack-section">
-                    <h4>Core Technologies</h4>
-                    <div className="project-tech">
-                      {project.tech.map((tech) => (
-                        <span key={tech}>{tech}</span>
-                      ))}
-                    </div>
+                <div className="project-section">
+                  <h4>Core Technologies</h4>
+                  <div className="project-tech">
+                    {activeProject.tech.map((tech) => (
+                      <span key={tech}>{tech}</span>
+                    ))}
                   </div>
                 </div>
 
                 <div className="project-actions">
-                  <a href={project.url} className="project-action project-action-primary" target="_blank" rel="noopener noreferrer">
-                    Live Demo
+                  <a href={activeProject.url} className="project-action project-action-primary" target="_blank" rel="noopener noreferrer">
+                    Live Site
                     <ArrowIcon />
                   </a>
-                  <a href={project.url} className="project-action project-action-secondary" target="_blank" rel="noopener noreferrer">
-                    View Project
+                  <a href={activeProject.url} className="project-action project-action-secondary" target="_blank" rel="noopener noreferrer">
+                    Visit Project
                     <ExternalIcon />
                   </a>
                 </div>
               </div>
             </article>
-          ))}
+          </div>
+
+          <div className="carousel-controls">
+            <button className="carousel-arrow" onClick={prev} aria-label="Previous project">
+              <ChevronIcon dir="left" />
+            </button>
+
+            <div className="carousel-dots" role="tablist" aria-label="Choose project">
+              {projects.map((project, index) => (
+                <button
+                  key={project.title}
+                  className={`carousel-dot ${index === active ? 'is-active' : ''}`}
+                  onClick={() => goTo(index)}
+                  role="tab"
+                  aria-selected={index === active}
+                  aria-label={project.title}
+                />
+              ))}
+            </div>
+
+            <span className="carousel-counter">
+              {String(active + 1).padStart(2, '0')}
+              <span>/ {String(count).padStart(2, '0')}</span>
+            </span>
+
+            <button className="carousel-arrow" onClick={next} aria-label="Next project">
+              <ChevronIcon dir="right" />
+            </button>
+          </div>
         </div>
       </div>
     </section>

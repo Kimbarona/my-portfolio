@@ -14,15 +14,15 @@ const suggestedQuestions = [
 ];
 
 const demoResponses = {
-  default: "I'm a full stack developer with 8+ years of experience. I specialize in building scalable web applications using Laravel, Node.js, React, and Vue.js. I also have strong skills in AI integration using OpenAI APIs.",
-  experience: "I have over 8 years of professional experience in full stack development. I've built enterprise-level applications, RESTful APIs, and modern web interfaces for various clients.",
-  skills: "My tech stack includes:\n\n**Frontend:** React, Vue.js, JavaScript, TypeScript, Next.js\n**Backend:** Laravel, Node.js, Express.js, Python\n**Database:** MySQL, PostgreSQL, MongoDB, Redis\n**AI:** OpenAI API, Prompt Engineering, RAG systems",
-  projects: "I've built several notable projects:\n\n1. **E-Commerce Platform** - Laravel, Vue.js, MySQL, Stripe\n2. **Task Management System** - React, Node.js, PostgreSQL, Socket.io\n3. **AI Content Generator** - Next.js, OpenAI API\n4. **Healthcare Portal** - Laravel, React, MySQL, AWS\n5. **Real Estate Marketplace** - Vue.js, Node.js, MongoDB",
-  hire: "You should hire me because:\n\n• 8+ years of full stack development experience\n• Strong expertise in both frontend and backend\n• AI integration capabilities (OpenAI, RAG systems)\n• Proven track record of delivering scalable solutions\n• Modern engineering mindset with clean code practices",
-  laravel: "Yes! Laravel is one of my primary backend technologies. I have extensive experience building applications with Laravel including APIs, authentication systems, and complex business logic.",
-  node: "Absolutely! Node.js is a core part of my backend development skills. I use it with Express.js for building REST APIs and real-time applications with Socket.io.",
-  react: "Yes, React is my primary frontend framework. I build modern, responsive web applications using React with hooks, context, and state management best practices.",
-  ai: "Yes! I'm actively developing AI-powered applications using:\n\n• OpenAI API integration\n• RAG (Retrieval-Augmented Generation) systems\n• Chatbot development\n• AI SaaS product concepts\n• Prompt engineering",
+  default: "I'm a full stack developer with 8+ years of experience building scalable web apps, fintech platforms, and business automation systems. I work primarily with Laravel, Node.js, Java, Vue.js, and React, and I build practical AI features using the OpenAI API and Claude.",
+  experience: "I have over 8 years of professional full stack development experience. I've shipped production systems including a high-volume fintech platform (TINBO), a construction monitoring & billing system, an e-commerce platform (Dream Pack), and a Philippine finance calculator suite.",
+  skills: "My tech stack includes:\n\n**Frontend:** React, Vue 3 (Pinia), JavaScript, TypeScript, Next.js, Angular, Tailwind CSS\n**Backend:** Laravel, Node.js, Java, PHP, Express.js, Python, C#/.NET\n**Database:** PostgreSQL, MySQL, MS SQL Server, MongoDB, Redis, Firebase\n**AI & DevOps:** OpenAI API, Claude, Prompt Engineering, Docker, AWS, Vercel, CI/CD",
+  projects: "Here are my featured projects:\n\n1. **TINBO Digital Platform** - High-volume fintech for bills payment, remittance & e-loading (React, Node.js, Java, PostgreSQL, Redis, AWS)\n2. **Construction Monitoring & Billing System** - Workflow automation that cut billing effort ~40-60% (Laravel, Vue.js, React, MySQL, Docker)\n3. **Dream Pack E-Commerce** - Scalable storefront + REST APIs (Laravel 12, Vue 3, Pinia, Filament, PostgreSQL)\n4. **Finance Tools Philippines** - PH finance calculators (salary, tax, SSS, PhilHealth, Pag-IBIG) with SEO & embeddable widgets (Vue 3, TypeScript, Vite)",
+  hire: "Reasons to work with me:\n\n• 8+ years of full stack development experience\n• Production track record in fintech, e-commerce, and workflow automation\n• Strong backend architecture, REST APIs, and performance/caching work\n• AI integration capabilities (OpenAI, Claude, RAG systems)\n• Clean, scalable, maintainable engineering practices",
+  laravel: "Yes! Laravel is one of my primary backend technologies. I've used it in production for the Construction Monitoring & Billing System and built Laravel 12 REST APIs for the Dream Pack e-commerce platform, covering APIs, auth, and complex business logic.",
+  node: "Absolutely! Node.js is a core part of my backend work. I built and maintained Node.js services on the TINBO fintech platform alongside Java services, handling transaction-heavy workloads.",
+  react: "Yes, React is one of my main frontend frameworks. I built responsive UI and transaction flows for the TINBO fintech platform and contributed React work to the construction billing system.",
+  ai: "Yes! I build practical AI-powered features using:\n\n• OpenAI API and Claude integration\n• RAG (Retrieval-Augmented Generation) systems for knowledge search\n• Chatbots (this portfolio's assistant is RAG-powered)\n• Prompt engineering for support and product automation",
 };
 
 function getDemoResponse(message) {
@@ -116,9 +116,11 @@ export default function AIAssistant() {
       setMessages(prev => [...prev, { role: 'assistant', content: responseText }]);
     } catch (err) {
       console.error('API Error:', err);
+      // Graceful fallback: if the live API is unavailable (rate limit, quota,
+      // network), serve the accurate canned answer so visitors always get a reply.
       setMessages(prev => [...prev, {
         role: 'assistant',
-        content: "I'm having trouble connecting to the AI service right now. This could be due to rate limits. Please try again in a moment!"
+        content: getDemoResponse(userMessage),
       }]);
     } finally {
       setIsLoading(false);

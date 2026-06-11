@@ -30,7 +30,7 @@ export default function Hero() {
       <div
         className="hero-glow"
         style={{
-          background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(59, 130, 246, 0.2) 0%, rgba(139, 92, 246, 0.1) 30%, transparent 60%)`,
+          background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(16, 185, 129, 0.2) 0%, rgba(6, 182, 212, 0.1) 30%, transparent 60%)`,
         }}
       ></div>
 
@@ -89,6 +89,14 @@ export default function Hero() {
             </svg>
             View My Work
           </a>
+          <a href="/Kim-Aldwin-Barona-CV.pdf" className="btn btn-secondary" download>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Download CV
+          </a>
           <a href="#contact" className="btn btn-secondary">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
@@ -105,13 +113,13 @@ export default function Hero() {
           </div>
           <div className="stat-divider"></div>
           <div className="stat">
-            <span className="stat-number">50+</span>
-            <span className="stat-label">Projects Delivered</span>
+            <span className="stat-number">30+</span>
+            <span className="stat-label">Project Delivered</span>
           </div>
           <div className="stat-divider"></div>
           <div className="stat">
-            <span className="stat-number">30+</span>
-            <span className="stat-label">Happy Clients</span>
+            <span className="stat-number">15+</span>
+            <span className="stat-label">Technologies</span>
           </div>
         </div>
       </div>

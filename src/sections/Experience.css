@@ -1,0 +1,238 @@
+.experience {
+  background: var(--bg-primary);
+}
+
+.experience .section-eyebrow {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-blue);
+  margin-bottom: 0.75rem;
+}
+
+.timeline {
+  position: relative;
+  margin-top: 3rem;
+  padding-left: 34px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  left: 9px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent-blue), var(--accent-purple), transparent);
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 28px;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition-delay: calc(var(--exp-index) * 60ms);
+}
+
+.timeline-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -33px;
+  top: 26px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--bg-primary);
+  border: 3px solid var(--accent-blue);
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.12);
+}
+
+.timeline-card {
+  padding: 1.6rem 1.8rem;
+}
+
+.timeline-card-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.timeline-card-head h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.timeline-company {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.98rem;
+  font-weight: 600;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.timeline-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.timeline-type {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent-blue);
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.timeline-period {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.timeline-summary {
+  margin: 1rem 0 0.9rem;
+  color: var(--text-secondary);
+  font-size: 0.97rem;
+}
+
+.timeline-points {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 1.2rem;
+}
+
+.timeline-points li {
+  position: relative;
+  padding-left: 20px;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.timeline-points li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-purple);
+}
+
+.timeline-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.timeline-tech span {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  padding: 4px 11px;
+  border-radius: 7px;
+}
+
+.exp-extras {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 24px;
+  margin-top: 3rem;
+}
+
+.exp-extra-card {
+  padding: 1.8rem;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.exp-extra-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.exp-extra-card h3 {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-blue);
+  margin-bottom: 1rem;
+}
+
+.exp-extra-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.exp-extra-sub {
+  margin-top: 4px;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+}
+
+.exp-cert-list {
+  display: grid;
+  gap: 10px;
+}
+
+.exp-cert-list li {
+  position: relative;
+  padding-left: 22px;
+  color: var(--text-secondary);
+  font-size: 0.93rem;
+  line-height: 1.5;
+}
+
+.exp-cert-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--accent-gradient);
+}
+
+@media (max-width: 768px) {
+  .timeline-card {
+    padding: 1.3rem 1.3rem;
+  }
+
+  .timeline-meta {
+    align-items: flex-start;
+  }
+
+  .exp-extras {
+    grid-template-columns: 1fr;
+  }
+}

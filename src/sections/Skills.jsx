@@ -12,7 +12,7 @@ const skillCategories = [
       </svg>
     ),
     skills: ['React', 'Vue.js', 'JavaScript', 'TypeScript', 'HTML/CSS', 'Next.js', 'Tailwind CSS', 'Angular'],
-    color: '#3B82F6',
+    color: '#10B981',
   },
   {
     title: 'Backend',
@@ -23,7 +23,7 @@ const skillCategories = [
       </svg>
     ),
     skills: ['Node.js', 'Laravel', 'PHP', 'Python', 'Express', 'REST API', 'C#', '.NET'],
-    color: '#8B5CF6',
+    color: '#06B6D4',
   },
   {
     title: 'Database',
@@ -35,7 +35,7 @@ const skillCategories = [
       </svg>
     ),
     skills: ['MySQL', 'MS SQL Server', 'PostgreSQL', 'MongoDB', 'Redis', 'Firebase', 'SQLite'],
-    color: '#10B981',
+    color: '#0EA5E9',
   },
   {
     title: 'AI & Tools',

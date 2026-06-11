@@ -107,15 +107,20 @@ export default function About() {
 
           <div className="about-visual fade-in">
             <div className="visual-card glass-card">
-              <div className="experience-badge">
-                <span className="years">8+</span>
-                <span className="label">Years of Experience</span>
+              <div className="profile-photo-wrap">
+                <img
+                  src="/profile.png"
+                  alt="Kim Aldwin Barona, Senior Full Stack Developer"
+                  className="profile-photo"
+                  loading="lazy"
+                />
+                <div className="profile-badge">
+                  <span className="years">8+</span>
+                  <span className="label">Years</span>
+                </div>
               </div>
-              <div className="visual-decoration">
-                <div className="orb orb-1"></div>
-                <div className="orb orb-2"></div>
-                <div className="orb orb-3"></div>
-              </div>
+              <h3 className="profile-name">Kim Aldwin Barona</h3>
+              <p className="profile-role">Senior Full Stack Developer</p>
               <div className="tech-stack">
                 <span>Laravel</span>
                 <span>Node.js</span>
