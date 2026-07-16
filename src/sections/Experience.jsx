@@ -4,6 +4,22 @@ import './Experience.css';
 const experience = [
   {
     role: 'Senior Full Stack Developer',
+    type: 'Freelance',
+    company: 'WorkBridge Technologies',
+    period: 'Apr 2026 – Present',
+    summary:
+      'Building early-stage SaaS platforms and internal business solutions, leading architecture and MVP development of multiple products.',
+    points: [
+      'Designed and developed scalable full-stack applications using Laravel 13, Node.js, Vue 3, Nuxt 4, and Next.js',
+      'Architected RESTful APIs, backend services, and PostgreSQL database structures following modern engineering best practices',
+      'Integrated AI-powered features using RAG, OpenAI APIs, and modern LLM workflows; leveraged Claude, Copilot, and Codex',
+      'Led architecture and MVP development of multiple SaaS products including multi-tenant platforms and subscription systems',
+      'Built cloud-ready applications with Docker, AWS, Git-based CI/CD pipelines, and automated deployment processes',
+    ],
+    tech: ['Laravel 13', 'PHP', 'Node.js', 'TypeScript', 'Next.js', 'Vue 3', 'Nuxt 4', 'PostgreSQL', 'AWS', 'Docker', 'CI/CD', 'OpenAI APIs', 'RAG'],
+  },
+  {
+    role: 'Senior Full Stack Developer',
     type: 'Contract',
     company: 'Trixicon LTD',
     period: 'Jan 2026 – Mar 2026',
