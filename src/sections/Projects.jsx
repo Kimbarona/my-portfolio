@@ -3,6 +3,31 @@ import './Projects.css';
 
 const projects = [
   {
+    title: 'WashFlow',
+    type: 'Multi-Tenant SaaS Platform',
+    status: 'In Development',
+    image: '/project-screenshots/washflow.png',
+    mobileImage: '/project-screenshots/washflow-mobile.png',
+    imageAlt: 'WashFlow multi-tenant SaaS platform dashboard showing laundry business management, branch overview, and subscription controls',
+    url: '#',
+    summary:
+      'A cloud-based SaaS platform for managing multi-branch laundry businesses — featuring store-based data isolation, subscription billing, order and inventory tracking, staff accounts, and a scalable API-first architecture built for commercial deployment.',
+    responsibilities: [
+      'Architected a multi-tenant SaaS backend with store-based data isolation using Laravel 13, PHP 8.4, and PostgreSQL',
+      'Built a Vue 3 + Nuxt 4 frontend with TypeScript, Pinia state management, and Filament v4 admin panel',
+      'Implemented role-based permissions, subscription management, and tenant onboarding workflows',
+      'Designed a scalable REST API with clean service layers, repository patterns, and Docker-based development',
+    ],
+    impact: [
+      'Enables laundry businesses to manage multiple branches from a single centralized platform',
+      'Provides complete data isolation between stores while maintaining a unified operational view',
+      'Built with enterprise-grade architecture ready for commercial SaaS deployment',
+    ],
+    highlights: ['Multi-Tenant SaaS', 'API-first Backend', 'Commercial Deployment'],
+    tech: ['Laravel 13', 'PHP 8.4', 'Nuxt 4', 'Vue 3', 'TypeScript', 'Pinia', 'PostgreSQL', 'Redis', 'Docker', 'Filament v4', 'REST API', 'GitHub Actions'],
+    accent: 'cyan',
+  },
+  {
     title: 'Finance Tools Philippines',
     type: 'Philippine Personal-Finance Calculator Suite',
     status: 'In Development',

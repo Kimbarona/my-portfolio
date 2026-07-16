@@ -58,6 +58,13 @@ export const portfolioKnowledge = [
   {
     id: 9,
     category: 'projects',
+    title: 'WashFlow',
+    content: 'WashFlow: a cloud-based multi-tenant SaaS platform designed for managing multi-branch laundry businesses. Features store-based data isolation, subscription management, customer and order management, staff accounts, inventory tracking, reporting, notifications, a tenant onboarding wizard, and role-based permissions. Built as Founder, System Architect, and Senior Full Stack Developer using Laravel 13, PHP 8.4, Nuxt 4, Vue 3, TypeScript, Pinia, PostgreSQL, Redis, Docker, Filament v4, REST API, with GitHub Actions CI/CD and AWS-ready deployment. The project follows enterprise SaaS architecture with a scalable API-first design, clean service layers, repository patterns, and OpenAI integration. Tech: Laravel 13, PHP 8.4, Nuxt 4, Vue 3, TypeScript, Pinia, PostgreSQL, Redis, Docker, Filament v4, REST API, GitHub Actions, AWS.',
+    keywords: ['washflow', 'saas', 'multi-tenant', 'laundry', 'subscription', 'multi-branch', 'filament', 'nuxt', 'vue 3', 'laravel 13', 'postgresql', 'docker', 'enterprise', 'commercial', 'onboarding', 'inventory', 'notifications']
+  },
+  {
+    id: 10,
+    category: 'projects',
     title: 'TINBO Digital Platform',
     content: 'TINBO Digital Platform (tinbo.ph): a high-volume digital financial services platform giving users in the Philippines and abroad online access to bills payment, remittance, e-loading, and government services. Built and maintained full-stack features across React.js, Node.js, and Java services; created reusable responsive UI for service discovery and transaction flows; integrated payment gateways, Firebase, and partner APIs; optimized PostgreSQL queries and applied Redis caching for transaction-heavy workloads; and supported AWS deployment and production operations. Tech: React.js, Node.js, Java, PostgreSQL, Redis, Firebase, AWS, SCSS.',
     keywords: ['tinbo', 'fintech', 'financial', 'payment', 'remittance', 'bills', 'e-loading', 'enterprise', 'react', 'node', 'java', 'redis', 'aws']

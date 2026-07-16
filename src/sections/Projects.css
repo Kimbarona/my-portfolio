@@ -68,6 +68,7 @@
 .project-showcase-violet { --project-accent: #a78bfa; --project-accent-soft: rgba(167, 139, 250, 0.16); }
 .project-showcase-amber { --project-accent: #f59e0b; --project-accent-soft: rgba(245, 158, 11, 0.16); }
 .project-showcase-emerald { --project-accent: #10b981; --project-accent-soft: rgba(16, 185, 129, 0.16); }
+.project-showcase-cyan { --project-accent: #06b6d4; --project-accent-soft: rgba(6, 182, 212, 0.16); }
 
 .carousel-viewport {
   overflow: hidden;
