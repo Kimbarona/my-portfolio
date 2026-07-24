@@ -1,10 +1,12 @@
 import Navigation from './components/Navigation';
 import Hero from './sections/Hero';
 import About from './sections/About';
+import AIExpertise from './sections/AIExpertise';
 import Experience from './sections/Experience';
-import Skills from './sections/Skills';
 import Projects from './sections/Projects';
-import AIVision from './sections/AIVision';
+import Workflow from './sections/Workflow';
+import TechStack from './sections/TechStack';
+import Metrics from './sections/Metrics';
 import AIAssistant from './components/AIAssistant';
 import Contact from './sections/Contact';
 
@@ -15,10 +17,12 @@ function App() {
       <main>
         <Hero />
         <About />
+        <AIExpertise />
         <Experience />
-        <Skills />
         <Projects />
-        <AIVision />
+        <Workflow />
+        <TechStack />
+        <Metrics />
         <AIAssistant />
         <Contact />
       </main>

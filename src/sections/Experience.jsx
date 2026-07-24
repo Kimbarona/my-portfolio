@@ -21,7 +21,7 @@ const experience = [
   {
     role: 'Senior Full Stack Developer',
     type: 'Contract',
-    company: 'Trixicon LTD',
+    company: 'Novanox LTD',
     period: 'Jan 2026 – Mar 2026',
     summary:
       'Sole technical owner of a full-scale e-commerce platform, from architecture to production deployment.',
@@ -72,7 +72,7 @@ const experience = [
       'Built queries, stored procedures, and reports with SAP HANA; customized SAP B1 modules',
       'Optimized backend processes and resolved performance bottlenecks',
     ],
-    tech: ['C#', '.NET', 'SAP B1', 'SAP HANA', 'CodeIgniter', 'PHP'],
+    tech: ['C#', '.NET', 'MSSQL', 'SAP B1', 'SAP HANA', 'CodeIgniter', 'PHP'],
   },
   {
     role: 'Full Stack Developer',
@@ -86,7 +86,7 @@ const experience = [
       'Built reusable frontend components and migrated legacy systems to modern frameworks',
       'Mentored junior developers and contributed to system architecture and technical decisions',
     ],
-    tech: ['Laravel', 'Node.js', 'C#', '.NET', 'Vue', 'Angular', 'React', 'MongoDB'],
+    tech: ['Laravel', 'Node.js', 'C#', '.NET', 'Vue', 'Angular', 'React', 'MongoDB', 'MSSQL', 'PostgreSQL', 'Docker', 'Godaddy', 'CI/CD'],
   },
 ];
 
@@ -121,9 +121,9 @@ export default function Experience() {
     <section id="experience" ref={sectionRef} className="experience">
       <div className="container">
         <span className="section-eyebrow">Career</span>
-        <h2 className="section-title">Professional Experience</h2>
+        <h2 className="section-title">AI Engineering Experience</h2>
         <p className="section-subtitle">
-          8 years building, scaling, and supporting production systems across enterprise, SaaS, and e-commerce.
+          8+ years building production systems, with focused AI integration experience across SaaS, enterprise, and fintech platforms.
         </p>
 
         <div className="timeline">

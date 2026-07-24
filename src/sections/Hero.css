@@ -117,7 +117,7 @@
   text-align: center;
   position: relative;
   z-index: 1;
-  max-width: 900px;
+  max-width: 960px;
 }
 
 .hero-badge {
@@ -131,6 +131,18 @@
   font-size: 0.85rem;
   color: var(--accent-blue);
   margin-bottom: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.badge-timezone {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  color: var(--accent-gold);
+  font-weight: 600;
 }
 
 .badge-dot {
@@ -153,12 +165,18 @@
 }
 
 .hero-title {
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: clamp(2.25rem, 5.5vw, 4rem);
   font-weight: 800;
   line-height: 1.1;
   margin-bottom: 24px;
   letter-spacing: -0.03em;
   color: var(--text-primary);
+}
+
+.title-divider {
+  color: var(--text-muted);
+  font-weight: 400;
+  margin: 0 4px;
 }
 
 .title-gradient {
@@ -191,9 +209,15 @@
 .hero-description {
   font-size: 1.1rem;
   color: var(--text-secondary);
-  max-width: 700px;
+  max-width: 720px;
   margin: 0 auto 24px;
-  line-height: 1.7;
+  line-height: 1.75;
+}
+
+.hero-highlight {
+  color: var(--accent-blue);
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 .hero-focus {
@@ -226,26 +250,26 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 48px;
+  gap: 32px;
   flex-wrap: wrap;
   padding: 32px;
   background: var(--glass-bg);
   backdrop-filter: blur(10px);
   border: 1px solid var(--glass-border);
   border-radius: 16px;
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
 .stat {
   text-align: center;
   flex: 1;
-  min-width: 100px;
+  min-width: 80px;
 }
 
 .stat-number {
   display: block;
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   font-weight: 800;
   background: linear-gradient(135deg, #10B981, #06B6D4);
   -webkit-background-clip: text;
@@ -255,7 +279,7 @@
 }
 
 .stat-label {
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -327,7 +351,13 @@
   }
 
   .hero-title {
-    font-size: 2.25rem;
+    font-size: 2rem;
+  }
+
+  .title-divider {
+    display: block;
+    height: 0;
+    overflow: hidden;
   }
 
   .hero-tagline {
@@ -336,12 +366,12 @@
   }
 
   .hero-stats {
-    gap: 24px;
+    gap: 20px;
     padding: 24px 16px;
   }
 
   .stat-number {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
   .stat-divider {
@@ -370,11 +400,16 @@
   .deco-ring {
     display: none;
   }
+
+  .hero-badge {
+    font-size: 0.78rem;
+    padding: 6px 16px;
+  }
 }
 
 @media (max-width: 480px) {
   .hero-title {
-    font-size: 1.875rem;
+    font-size: 1.75rem;
   }
 
   .hero-stats {

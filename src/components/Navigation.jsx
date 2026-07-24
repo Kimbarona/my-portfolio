@@ -4,11 +4,10 @@ import './Navigation.css';
 const navLinks = [
   { name: 'Home', href: '#hero' },
   { name: 'About', href: '#about' },
+  { name: 'AI Expertise', href: '#ai-expertise' },
   { name: 'Experience', href: '#experience' },
-  { name: 'Skills', href: '#skills' },
   { name: 'Projects', href: '#projects' },
-  { name: 'AI Vision', href: '#ai-vision' },
-  { name: 'AI Chat', href: '#ai-assistant' },
+  { name: 'Tech Stack', href: '#tech-stack' },
   { name: 'Contact', href: '#contact' },
 ];
 

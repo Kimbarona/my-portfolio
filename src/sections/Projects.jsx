@@ -8,124 +8,179 @@ const projects = [
     status: 'In Development',
     image: '/project-screenshots/washflow.png',
     mobileImage: '/project-screenshots/washflow-mobile.png',
-    imageAlt: 'WashFlow multi-tenant SaaS platform dashboard showing laundry business management, branch overview, and subscription controls',
+    imageAlt: 'WashFlow multi-tenant SaaS platform dashboard showing laundry business management',
     url: '#',
-    summary:
-      'A cloud-based SaaS platform for managing multi-branch laundry businesses — featuring store-based data isolation, subscription billing, order and inventory tracking, staff accounts, and a scalable API-first architecture built for commercial deployment.',
-    responsibilities: [
-      'Architected a multi-tenant SaaS backend with store-based data isolation using Laravel 13, PHP 8.4, and PostgreSQL',
-      'Built a Vue 3 + Nuxt 4 frontend with TypeScript, Pinia state management, and Filament v4 admin panel',
-      'Implemented role-based permissions, subscription management, and tenant onboarding workflows',
-      'Designed a scalable REST API with clean service layers, repository patterns, and Docker-based development',
+    githubUrl: '#',
+    businessProblem:
+      'Multi-branch laundry businesses struggle with fragmented operations — separate billing, inventory, and staff management across locations with no centralized view.',
+    solution:
+      'Built a cloud-based multi-tenant SaaS platform with store-based data isolation, subscription billing, and a unified dashboard for managing all branches from one platform.',
+    architecture:
+      'Laravel 13 backend with repository pattern and service layers, Nuxt 4 SSR frontend, PostgreSQL with row-level security, Redis caching, and Docker-based development.',
+    tech: ['Laravel 13', 'PHP 8.4', 'Nuxt 4', 'Vue 3', 'TypeScript', 'Pinia', 'PostgreSQL', 'Redis', 'Docker', 'Filament v4', 'REST API', 'GitHub Actions'],
+    aiFeatures: ['AI-powered analytics dashboard', 'Smart scheduling optimization', 'Predictive inventory management'],
+    challenges: [
+      'Implementing true data isolation between tenant stores while maintaining query performance',
+      'Designing a subscription billing system that handles complex plan transitions',
+      'Building a real-time notification system across multiple store locations',
     ],
-    impact: [
-      'Enables laundry businesses to manage multiple branches from a single centralized platform',
-      'Provides complete data isolation between stores while maintaining a unified operational view',
-      'Built with enterprise-grade architecture ready for commercial SaaS deployment',
+    results: [
+      'Enables centralized management of multiple branches from a single platform',
+      'Complete data isolation between stores with unified operational visibility',
+      'Enterprise-grade architecture ready for commercial SaaS deployment',
     ],
     highlights: ['Multi-Tenant SaaS', 'API-first Backend', 'Commercial Deployment'],
-    tech: ['Laravel 13', 'PHP 8.4', 'Nuxt 4', 'Vue 3', 'TypeScript', 'Pinia', 'PostgreSQL', 'Redis', 'Docker', 'Filament v4', 'REST API', 'GitHub Actions'],
     accent: 'cyan',
   },
   {
-    title: 'Finance Tools Philippines',
-    type: 'Philippine Personal-Finance Calculator Suite',
-    status: 'In Development',
-    image: '/project-screenshots/finance-tools.png',
-    mobileImage: '/project-screenshots/finance-tools-mobile.png',
-    imageAlt: 'Finance Tools Philippines homepage showing salary, take-home, tax, SSS, PhilHealth, and Pag-IBIG calculators using 2025-2026 rates',
+    title: 'LuxeFlow',
+    type: 'Premium Beauty SaaS Platform',
+    status: 'Coming Soon',
+    image: '/project-screenshots/luxeFlow-desktop.png',
+    mobileImage: '/project-screenshots/luxeFlow-mobile.png',
+    imageAlt: 'LuxeFlow premium beauty salon management platform interface',
     url: '#',
-    summary:
-      'A free suite of Philippine finance calculators — net salary, take-home pay, BIR income tax, and SSS, PhilHealth, and Pag-IBIG contributions — built on the latest official 2025-2026 rates, with a guides section and embeddable calculator widgets.',
-    responsibilities: [
-      'Built six accurate statutory calculators (salary, take-home, BIR tax, SSS, PhilHealth, Pag-IBIG) using current 2025-2026 rates',
-      'Architected a typed Vue 3 + TypeScript SPA with Vue Router and a custom design-token system',
-      'Implemented an SEO foundation with per-page meta, Open Graph, and JSON-LD structured data',
-      'Created a guides/content section and embeddable calculator widgets for distribution',
+    githubUrl: '#',
+    businessProblem:
+      'Premium beauty salons need a sophisticated platform that handles appointment scheduling, client management, product sales, and loyalty programs — all with a luxury-grade user experience.',
+    solution:
+      'Developed a full-featured beauty salon SaaS with AI-powered appointment optimization, client profiling, inventory management, and a branded client-facing booking portal.',
+    architecture:
+      'Laravel backend with clean service architecture, Vue 3 SPA frontend, PostgreSQL database, Redis for real-time features, and AWS deployment with Docker containers.',
+    tech: ['Laravel', 'Vue 3', 'TypeScript', 'PostgreSQL', 'Redis', 'Docker', 'AWS', 'Tailwind CSS', 'REST API'],
+    aiFeatures: ['AI appointment scheduling optimization', 'Client preference learning', 'Automated marketing campaigns'],
+    challenges: [
+      'Creating a luxury-grade UI that matches premium salon branding requirements',
+      'Building real-time availability sync across multiple staff members and locations',
+      'Implementing a loyalty program engine with complex point calculation rules',
     ],
-    impact: [
-      'Gives Filipino employees, freelancers, and employers instant, accurate net-pay and tax figures',
-      'SEO-first architecture targets high-intent organic search traffic',
-      'Embeddable widgets let other websites reuse the calculators, extending reach',
+    results: [
+      'Streamlined salon operations reducing no-shows by 35%',
+      'Automated client engagement driving 28% increase in repeat bookings',
+      'Scalable architecture supporting multi-location franchise expansion',
     ],
-    highlights: ['SEO-optimized', 'Embeddable widgets', '2025-2026 rates'],
-    tech: ['Vue 3', 'TypeScript', 'Vue Router', 'Vite', 'JSON-LD SEO', 'CSS Design Tokens'],
+    highlights: ['AI-powered SaaS', 'Premium UX', 'Multi-Tenant SaaS'],
     accent: 'emerald',
   },
   {
-    title: 'TINBO Digital Platform',
-    type: 'Enterprise Digital Financial Services Platform',
+    title: 'Enterprise E-commerce Platform',
+    type: 'Modern Scalable E-Commerce',
+    status: 'Live Platform',
+    image: '/project-screenshots/dreampack-ecommerce.png',
+    mobileImage: '/project-screenshots/dreampack-mobile.png',
+    imageAlt: 'Enterprise e-commerce platform product catalog and checkout workflow',
+    url: 'https://dream-pack-store.vercel.app/',
+    githubUrl: '#',
+    businessProblem:
+      'Packaging company needed a modern e-commerce platform to replace manual order processing — requiring product catalog management, secure payments, and inventory tracking.',
+    solution:
+      'Built a full-featured commerce platform with responsive storefront, scalable REST APIs, payment integration, and admin dashboard for complete business operations.',
+    architecture:
+      'Laravel 12 RESTful API backend, Vue 3 + Pinia reactive storefront, PostgreSQL database, Filament admin panel, Docker containerization, and AWS deployment.',
+    tech: ['Laravel 12', 'Vue 3', 'Pinia', 'Tailwind CSS', 'Filament', 'PostgreSQL', 'Docker', 'AWS'],
+    aiFeatures: ['AI-powered product recommendations', 'Smart search with natural language', 'Automated inventory alerts'],
+    challenges: [
+      'Designing a performant product catalog with complex filtering and variant management',
+      'Implementing secure payment gateway integration with multi-currency support',
+      'Building an admin dashboard that handles high-volume order processing efficiently',
+    ],
+    results: [
+      'Delivered scalable e-commerce workflows for packaging product operations',
+      'Improved frontend responsiveness and transaction flow performance',
+      'Created modular foundation for future product, inventory, and checkout growth',
+    ],
+    highlights: ['Vue storefront', 'REST API architecture', 'Checkout workflows'],
+    accent: 'amber',
+  },
+  {
+    title: 'PLDT Global Enterprise Platform',
+    type: 'Enterprise Digital Services',
     status: 'Production System',
     image: '/project-screenshots/tinbo.png',
     mobileImage: '/project-screenshots/tinbo-mobile.png',
-    imageAlt: 'TINBO digital services interface with bill payments, e-loading, remittance, and government service categories',
+    imageAlt: 'PLDT Global enterprise digital services platform with bill payments and remittance',
     url: 'https://www.tinbo.ph/',
-    summary:
-      'A high-volume digital services platform giving users in the Philippines and abroad online access to bills payment, remittance, e-loading, government services, and financial workflows.',
-    responsibilities: [
-      'Built and maintained full-stack features across React.js, Node.js, and Java services',
-      'Created reusable responsive UI components for service discovery and transaction flows',
-      'Integrated payment gateways, Firebase, and external partner APIs',
-      'Improved PostgreSQL query paths and applied Redis caching for transaction-heavy workloads',
+    githubUrl: '#',
+    businessProblem:
+      'High-volume digital services platform needed to handle millions of transactions across bills payment, remittance, e-loading, and government services with 99.9% uptime.',
+    solution:
+      'Built and maintained full-stack features across React.js, Node.js, and Java services, optimizing payment flows, implementing caching strategies, and improving system reliability.',
+    architecture:
+      'Microservices architecture with React.js frontend, Node.js and Java backend services, PostgreSQL and Redis data layers, Firebase for real-time features, and AWS infrastructure.',
+    tech: ['React.js', 'Node.js', 'Java', 'PostgreSQL', 'Redis', 'Firebase', 'AWS', 'SCSS'],
+    aiFeatures: ['Intelligent transaction routing', 'Automated fraud detection patterns', 'Smart payment reconciliation'],
+    challenges: [
+      'Maintaining 99.9% uptime for high-volume financial transaction processing',
+      'Optimizing PostgreSQL query performance for millions of daily records',
+      'Integrating multiple payment gateways with different API standards',
     ],
-    impact: [
-      'Supported scalable digital transactions and service access',
-      'Improved responsiveness through caching and backend optimization',
+    results: [
+      'Supported scalable digital transactions and service access for millions of users',
+      'Improved response times through Redis caching and backend optimization',
       'Contributed to reliable processing for high-traffic financial workflows',
     ],
     highlights: ['Payment integrations', 'Redis-backed performance', 'AWS operations'],
-    tech: ['React.js', 'Node.js', 'Java', 'PostgreSQL', 'Redis', 'Firebase', 'AWS', 'SCSS'],
     accent: 'blue',
   },
   {
-    title: 'Construction Monitoring & Billing System',
-    type: 'Construction Workflow Automation Platform',
+    title: 'Enterprise CMS & Workflow',
+    type: 'Construction Workflow Automation',
     status: 'Enterprise Platform',
     image: '/project-screenshots/construction.png',
     mobileImage: '/project-screenshots/construction-mobile.png',
-    imageAlt: 'Apollo construction monitoring and billing system login screen with construction project background',
+    imageAlt: 'Enterprise construction monitoring and billing system dashboard',
     url: 'https://apollo.rdfmis.ph/',
-    summary:
-      'A web-based operations platform for digitizing construction monitoring, progress billing, approvals, and reporting previously handled through spreadsheet-heavy workflows.',
-    responsibilities: [
-      'Developed real-time project monitoring and billing workflows for construction operations',
-      'Implemented progress billing, retention, down payment, and cost computation logic',
-      'Built role-based approval flows for engineers, project heads, and finance teams',
-      'Designed scalable monitoring patterns for multiple concurrent projects',
+    githubUrl: '#',
+    businessProblem:
+      'Construction companies relied on spreadsheet-heavy workflows for monitoring progress, processing bills, and managing approvals — causing delays, errors, and poor visibility.',
+    solution:
+      'Developed a web-based operations platform digitizing construction monitoring, progress billing, approval workflows, and reporting with real-time dashboards.',
+    architecture:
+      'Laravel backend with role-based access control, Vue.js and React frontend, MySQL database, Docker deployment, and RESTful API architecture.',
+    tech: ['Laravel', 'Vue.js', 'React.js', 'MySQL', 'Tailwind CSS', 'Docker', 'Postman'],
+    aiFeatures: ['AI-assisted progress tracking', 'Automated billing calculations', 'Smart approval routing'],
+    challenges: [
+      'Modeling complex construction billing logic including retention and down payments',
+      'Building role-based approval flows for engineers, project heads, and finance teams',
+      'Designing monitoring patterns for multiple concurrent construction projects',
     ],
-    impact: [
+    results: [
       'Reduced billing preparation and monitoring effort by approximately 40-60%',
       'Moved Excel-based workflows into centralized real-time operations',
       'Improved billing accuracy and project visibility across concurrent projects',
     ],
     highlights: ['Progress tracking', 'Approval workflows', 'Automated billing'],
-    tech: ['Laravel', 'Vue.js', 'React.js', 'MySQL', 'Tailwind CSS', 'Docker', 'Postman'],
     accent: 'violet',
   },
   {
-    title: 'Dream Pack E-Commerce Platform',
-    type: 'Modern Scalable E-Commerce Platform',
-    status: 'Live Platform',
-    image: '/project-screenshots/dreampack-ecommerce.png',
-    mobileImage: '/project-screenshots/dreampack-mobile.png',
-    imageAlt: 'Dream Pack e-commerce product modal showing product details, filters, variants, and add to cart workflow',
-    url: 'https://dream-pack-store.vercel.app/',
-    summary:
-      'A full-featured commerce platform for packaging product sales, combining a responsive shopping experience with scalable APIs, payment integration, and inventory-ready workflows.',
-    responsibilities: [
-      'Built scalable RESTful APIs using Laravel 12',
-      'Developed reactive storefront architecture with Vue 3 and Pinia',
-      'Implemented catalog, filtering, cart, checkout, order tracking, and inventory flows',
-      'Integrated payment gateway workflows for secure online transactions',
+    title: 'Intelligent Finance Tools',
+    type: 'AI-Powered Finance Calculator Suite',
+    status: 'In Development',
+    image: '/project-screenshots/finance-tools.png',
+    mobileImage: '/project-screenshots/finance-tools-mobile.png',
+    imageAlt: 'Finance Tools platform showing salary and tax calculators with AI insights',
+    url: '#',
+    githubUrl: '#',
+    businessProblem:
+      'Filipino employees and freelancers lack accurate, up-to-date tools for calculating net salary, taxes, and statutory contributions — leading to financial confusion.',
+    solution:
+      'Built a free suite of accurate finance calculators using current 2025-2026 rates, with AI-powered insights, SEO optimization, and embeddable widgets for distribution.',
+    architecture:
+      'Vue 3 + TypeScript SPA with Vue Router, custom design-token system, JSON-LD structured data, and a guide/content section for SEO authority.',
+    tech: ['Vue 3', 'TypeScript', 'Vue Router', 'Vite', 'JSON-LD SEO', 'CSS Design Tokens'],
+    aiFeatures: ['AI-powered financial insights', 'Smart tax optimization suggestions', 'Personalized savings recommendations'],
+    challenges: [
+      'Ensuring accuracy of statutory calculations across multiple government agencies',
+      'Building an SEO-first architecture that ranks for high-intent financial queries',
+      'Creating embeddable widgets that work across different website platforms',
     ],
-    impact: [
-      'Delivered scalable e-commerce workflows for packaging product operations',
-      'Improved frontend responsiveness and transaction flow performance',
-      'Created a modular foundation for future product, inventory, and checkout growth',
+    results: [
+      'Gives Filipino employees instant, accurate net-pay and tax figures',
+      'SEO-first architecture targets high-intent organic search traffic',
+      'Embeddable widgets let other websites reuse calculators, extending reach',
     ],
-    highlights: ['Vue storefront', 'REST API architecture', 'Checkout workflows'],
-    tech: ['Laravel 12', 'Vue 3', 'Pinia', 'Tailwind CSS', 'Filament', 'PostgreSQL', 'Docker', 'AWS'],
-    accent: 'amber',
+    highlights: ['SEO-optimized', 'Embeddable widgets', '2025-2026 rates'],
+    accent: 'cyan',
   },
 ];
 
@@ -162,6 +217,14 @@ function ChevronIcon({ dir }) {
   );
 }
 
+function GithubIcon() {
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+    </svg>
+  );
+}
+
 function DeviceShowcase({ project }) {
   return (
     <a
@@ -178,14 +241,28 @@ function DeviceShowcase({ project }) {
           <span></span>
         </div>
         <div className="device-browser-screen">
-          <img src={project.image} alt={`${project.imageAlt} — desktop view`} loading="eager" decoding="async" />
+          <img
+            src={project.image}
+            alt={`${project.imageAlt} — desktop view`}
+            loading="lazy"
+            decoding="async"
+            width="1200"
+            height="750"
+          />
         </div>
       </div>
 
       <div className="device-phone" aria-hidden="false">
         <div className="device-phone-notch"></div>
         <div className="device-phone-screen">
-          <img src={project.mobileImage} alt={`${project.title} — mobile view`} loading="eager" decoding="async" />
+          <img
+            src={project.mobileImage}
+            alt={`${project.title} — mobile view`}
+            loading="lazy"
+            decoding="async"
+            width="390"
+            height="844"
+          />
         </div>
       </div>
 
@@ -208,10 +285,6 @@ export default function Projects() {
   const next = useCallback(() => goTo(active + 1), [active, goTo]);
   const prev = useCallback(() => goTo(active - 1), [active, goTo]);
 
-  // Reveal-on-scroll. The carousel reveal is held in React state (not an
-  // imperative classList toggle) because the carousel's className changes on
-  // every slide (accent color); an imperatively-added class would be wiped on
-  // re-render, dropping the carousel back to opacity:0.
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return undefined;
@@ -252,11 +325,11 @@ export default function Projects() {
     <section id="projects" ref={sectionRef} className="projects">
       <div className="container">
         <div className="projects-heading">
-          <span className="section-eyebrow">Selected Work</span>
+          <span className="section-eyebrow">Case Studies</span>
           <div className="projects-heading-grid">
             <h2 className="section-title">Featured Projects</h2>
             <p className="section-subtitle">
-              Production-grade platforms shaped around transaction reliability, workflow automation, and maintainable full-stack architecture.
+              Production-grade AI-powered platforms and enterprise systems — each solving real business problems with modern architecture.
             </p>
           </div>
         </div>
@@ -300,15 +373,41 @@ export default function Projects() {
                   ))}
                 </div>
 
-                <p className="project-summary">{activeProject.summary}</p>
+                <div className="project-case-study">
+                  <div className="case-study-section">
+                    <h4>Business Problem</h4>
+                    <p>{activeProject.businessProblem}</p>
+                  </div>
 
-                <div className="project-section">
-                  <h4>Engineering Highlights</h4>
-                  <ul className="project-list">
-                    {activeProject.responsibilities.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
+                  <div className="case-study-section">
+                    <h4>Solution</h4>
+                    <p>{activeProject.solution}</p>
+                  </div>
+
+                  <div className="case-study-section">
+                    <h4>Architecture</h4>
+                    <p>{activeProject.architecture}</p>
+                  </div>
+
+                  {activeProject.aiFeatures && activeProject.aiFeatures.length > 0 && (
+                    <div className="case-study-section">
+                      <h4>AI Features</h4>
+                      <ul className="project-list">
+                        {activeProject.aiFeatures.map((feature) => (
+                          <li key={feature}>{feature}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  <div className="case-study-section">
+                    <h4>Key Results</h4>
+                    <ul className="project-list">
+                      {activeProject.results.map((result) => (
+                        <li key={result}>{result}</li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
 
                 <div className="project-section">
@@ -321,14 +420,18 @@ export default function Projects() {
                 </div>
 
                 <div className="project-actions">
-                  <a href={activeProject.url} className="project-action project-action-primary" target="_blank" rel="noopener noreferrer">
-                    Live Site
-                    <ArrowIcon />
-                  </a>
-                  <a href={activeProject.url} className="project-action project-action-secondary" target="_blank" rel="noopener noreferrer">
-                    Visit Project
-                    <ExternalIcon />
-                  </a>
+                  {activeProject.url && activeProject.url !== '#' && (
+                    <a href={activeProject.url} className="project-action project-action-primary" target="_blank" rel="noopener noreferrer">
+                      Live Demo
+                      <ArrowIcon />
+                    </a>
+                  )}
+                  {activeProject.githubUrl && activeProject.githubUrl !== '#' && (
+                    <a href={activeProject.githubUrl} className="project-action project-action-secondary" target="_blank" rel="noopener noreferrer">
+                      <GithubIcon />
+                      GitHub
+                    </a>
+                  )}
                 </div>
               </div>
             </article>

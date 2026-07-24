@@ -1,0 +1,127 @@
+.workflow {
+  background: var(--bg-primary);
+  overflow: hidden;
+}
+
+.workflow-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 60px;
+}
+
+.workflow-timeline {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  overflow-x: auto;
+  padding: 20px 0 40px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+
+.workflow-timeline::-webkit-scrollbar {
+  height: 6px;
+}
+
+.workflow-timeline::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.workflow-timeline::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.workflow-node {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  min-width: 120px;
+  padding: 0 8px;
+}
+
+.workflow-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--glass-border);
+  border-radius: 14px;
+  background:
+    linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(6, 182, 212, 0.08)),
+    rgba(15, 23, 42, 0.8);
+  color: #6ee7b7;
+  margin-bottom: 14px;
+  transition: all 0.3s ease;
+}
+
+.workflow-node:hover .workflow-icon {
+  border-color: rgba(16, 185, 129, 0.4);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(6, 182, 212, 0.2));
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.15);
+}
+
+.workflow-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  white-space: nowrap;
+}
+
+.workflow-desc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  max-width: 110px;
+}
+
+.workflow-connector {
+  position: absolute;
+  right: -16px;
+  top: 16px;
+  color: var(--text-muted);
+  opacity: 0.4;
+}
+
+@media (max-width: 768px) {
+  .workflow-timeline {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding: 0;
+    overflow-x: visible;
+  }
+
+  .workflow-node {
+    flex-direction: row;
+    text-align: left;
+    min-width: auto;
+    width: 100%;
+    max-width: 400px;
+    padding: 16px 0;
+    gap: 16px;
+  }
+
+  .workflow-icon {
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+
+  .workflow-connector {
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: rotate(90deg);
+    margin: 8px 0;
+  }
+
+  .workflow-desc {
+    max-width: none;
+  }
+}

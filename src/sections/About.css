@@ -16,14 +16,25 @@
 .about-intro,
 .about-desc {
   color: var(--text-secondary);
-  font-size: 1.1rem;
-  line-height: 1.8;
-  margin-bottom: 24px;
+  font-size: 1.05rem;
+  line-height: 1.85;
+  margin-bottom: 20px;
+  max-width: 680px;
+}
+
+.about-desc + .about-desc {
+  margin-top: 4px;
 }
 
 .about-intro strong,
 .about-desc strong {
   color: var(--text-primary);
+}
+
+.tech-highlight {
+  color: var(--accent-blue);
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 .about-highlights {

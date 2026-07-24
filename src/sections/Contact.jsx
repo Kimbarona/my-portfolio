@@ -208,7 +208,7 @@ export default function Contact() {
           <div className="contact-info fade-in">
             <h2 className="section-title">Let's Work Together</h2>
             <p className="section-subtitle" style={{ marginBottom: '40px' }}>
-              Open to full-time roles, contracts, and freelance projects. If
+              Open to full-time AI engineering roles, contract engagements, and AI integration projects. If
               you're hiring or have something to build, I'd love to hear from you.
             </p>
 
@@ -374,11 +374,11 @@ export default function Contact() {
                     disabled={isSending}
                   >
                     <option value="">Select a type</option>
-                    <option value="Full-time role">Full-time role</option>
-                    <option value="Contract role">Contract role</option>
-                    <option value="Freelance project">Freelance project</option>
-                    <option value="AI integration">AI integration</option>
-                    <option value="Backend/API development">Backend/API development</option>
+                    <option value="AI Integration Project">AI Integration Project</option>
+                    <option value="Full-time AI Engineer Role">Full-time AI Engineer Role</option>
+                    <option value="Contract/Freelance">Contract / Freelance</option>
+                    <option value="SaaS Development">SaaS Development</option>
+                    <option value="Enterprise Systems">Enterprise Systems</option>
                     <option value="Other / general inquiry">Other / general inquiry</option>
                   </select>
                 </div>
@@ -459,8 +459,8 @@ export default function Contact() {
           <div className="footer-content">
             <p>&copy; 2026 Developer Portfolio. Built with React & passion.</p>
             <p className="footer-tagline">
-              <span className="gradient-text">Full Stack Developer</span> |{' '}
-              <span className="gradient-text">AI-Powered Solutions</span>
+              <span className="gradient-text">AI Integration Engineer</span> |{' '}
+              <span className="gradient-text">Senior Full Stack Developer</span>
             </p>
           </div>
         </div>
